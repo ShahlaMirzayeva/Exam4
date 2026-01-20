@@ -21,7 +21,8 @@ namespace Exam4.Areas.Admin.Controllers
         {
             PositionVm positionVm = new()
             {
-                Positions = await _context.Positions.ToListAsync()
+                Positions = await _context.Positions.Where(p=>p.IsDeleted==false).ToListAsync()
+
             };
             return View(positionVm);
         }
@@ -54,6 +55,47 @@ namespace Exam4.Areas.Admin.Controllers
             var position = await _context.Positions.FindAsync(id);
             if (position == null) return NotFound();
             return View(position);
+        }
+
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null) return NotFound();
+            Position position = await _context.Positions.FindAsync(id);
+            if (position == null) return NotFound();
+            return View(position);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(Position updatePosition,int? id)
+        {
+            if (id == null) return NotFound();
+            Position dbposition = await _context.Positions.FindAsync(id);
+            if (dbposition == null) return NotFound();
+           
+            if (ModelState["Name"].ValidationState==ModelValidationState.Invalid)
+            {
+                return NotFound();
+            }
+         
+         
+       
+            dbposition.Name = updatePosition.Name;
+           
+          
+         await _context.SaveChangesAsync();
+
+            return RedirectToAction("Index", "Position");
+        }
+     
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if(id==null)return NotFound();
+            Position position= _context.Positions.Find(id);
+
+            if (position == null) return NotFound();
+            position.IsDeleted = true;  
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index","Position");
         }
     }
 }

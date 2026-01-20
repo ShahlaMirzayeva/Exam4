@@ -35,8 +35,8 @@
                                     @item.Name
                                 </td>
                                 <td>
-                                    <a class="btn btn-danger" href="#"><i class="fa fa-trash-o"></i></a>
-                                    <a class="btn btn-primary" href="#"><i class="fa fa-edit"></i></a>
+                                    <a class="btn btn-danger" asp-area="Admin" asp-controller="Position" asp-action="Delete" asp-route-id="@item.Id"><i class="fa fa-trash-o"></i></a>
+                                    <a class="btn btn-primary" asp-area="Admin" asp-controller="Position" asp-action="Edit"asp-route-id="@item.Id"><i class="fa fa-edit"></i></a>
                                     <a class="btn btn-success"asp-area="Admin" asp-controller="Position"asp-action="Detail"asp-route-id="@item.Id"><i class="fa fa-info-circle"></i></a>
                                 </td>
                             </tr>

@@ -1,0 +1,25 @@
+﻿@model Position
+<div class="content-wrapper">
+    <div class="row">
+        <div class="col-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Position</h4>
+                    <p class="card-description">
+                      Edit
+                    </p>
+                    <form class="forms-sample" method="post">
+                       
+                        <div class="form-group">
+                            <label asp-for="@Model.Name" for="exampleInputName1">Name</label>
+                            <input asp-for="@Model.Name" type="text" class="form-control" id="exampleInputName1" placeholder="Name">
+                            <span asp-validation-for="@Model.Name" class="text-danger"></span>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary me-2">Submit</button>
+                      
+                    </form>
+                </div>
+            </div>
+        </div>
+</<div>
